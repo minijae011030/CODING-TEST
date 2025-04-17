@@ -1,6 +1,5 @@
 function solution(s) {
   let sArr = s.split("");
-  var answer = true;
   let stack = [];
 
   if (s[0] == ")") return false;
