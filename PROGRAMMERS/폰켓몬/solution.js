@@ -1,12 +1,15 @@
 function solution(nums) {
-  const select = nums.length / 2;
+  let n = nums.length / 2;
 
-  const check = nums.reduce((total, cur) => {
-    total[cur] ? total[cur]++ : (total[cur] = 1);
-    return total;
-  }, {});
+  let monsterMap = new Map();
 
-  const checkLeng = Object.keys(check).length;
+  for (monster of nums) {
+    monsterMap.set(monster, (monsterMap.get(monster) || 0) + 1);
+  }
 
-  return checkLeng > select ? select : checkLeng;
+  if (monsterMap.size >= n) {
+    return n;
+  }
+
+  return monsterMap.size;
 }
