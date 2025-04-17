@@ -1,9 +1,11 @@
 function solution(arr) {
-  var answer = [];
+  let answer = [arr.shift()];
 
-  for (let i = 0; i < arr.length; i++) {
-    if (answer.length === 0 || answer[answer.length - 1] !== arr[i]) {
-      answer.push(arr[i]);
+  let idx = 0;
+  while (arr.length > idx) {
+    let n = arr[idx++];
+    if (answer[answer.length - 1] != n) {
+      answer.push(n);
     }
   }
 
