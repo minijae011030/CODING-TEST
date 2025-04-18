@@ -1,0 +1,15 @@
+## 문제
+
+Given a string s containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.
+
+An input string is valid if:
+
+Open brackets must be closed by the same type of brackets.
+Open brackets must be closed in the correct order.
+Every close bracket has a corresponding open bracket of the same type.
+
+## 요약
+
+메모리: 55.7 KB
+
+시간: 2 ms
