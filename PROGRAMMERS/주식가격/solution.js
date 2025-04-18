@@ -1,24 +1,25 @@
 function solution(prices) {
-  var answer = [];
+  let stack = [];
+  const len = prices.length;
+  let answer = new Array(len);
 
-  let stockArr = [[prices.shift(), 0, 0]]; // [가격, 가격이 오른 시간, 하락 여부]
+  for (let i = 0; i < len; ++i) {
+    const current = prices[i];
 
-  let idx = 0;
-  while (prices.length > idx) {
-    const s = prices[idx++];
-    stockArr.forEach((stock) => {
-      if (stock[2] == 0) {
-        stock[1] += 1;
+    while (stack.length) {
+      const top = stack[stack.length - 1];
+      if (current < prices[top]) {
+        answer[top] = i - top;
+        stack.pop();
+      } else break;
+    }
 
-        if (stock[0] > s) stock[2] = 1;
-      }
-    });
-
-    stockArr.push([s, 0, 0]);
+    stack.push(i);
   }
 
-  for (stock of stockArr) {
-    answer.push(stock[1]);
+  for (let i = 0; i < stack.length; ++i) {
+    const idx = stack[i];
+    answer[idx] = len - 1 - idx;
   }
 
   return answer;
