@@ -4,14 +4,12 @@ function solution(s) {
   for (let i = 1; i <= s.length; i++) {
     // i -> 자르는 개수
     let zipString = [];
-    let copiedString = s;
 
     for (let j = 0; j < s.length; j += i) {
       zipString.push(s.slice(j, j + i));
     }
 
     let finalString = "";
-    let stack = [];
     let count = 1;
 
     for (let k = 1; k < zipString.length; k++) {
