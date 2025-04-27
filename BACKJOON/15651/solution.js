@@ -3,25 +3,21 @@ const filePath = process.platform === "linux" ? "/dev/stdin" : "input.txt";
 let input = fs.readFileSync(filePath).toString().trim().split("\n");
 
 let [N, M] = input[0].split(" ").map(Number);
-
 let output = [];
-let visited = new Array(N).fill(false);
-
-function backtrack(cnt, start) {
+let result = "";
+function backtrack(cnt) {
   if (cnt === M) {
-    console.log(output.join(" "));
+    result += output.join(" ") + "\n";
     return;
   }
 
-  for (let i = start; i < N; i++) {
-    if (visited[i]) continue;
-
-    visited[i] = true;
+  for (let i = 0; i < N; i++) {
     output.push(i + 1);
-    backtrack(cnt + 1, i + 1);
+    backtrack(cnt + 1);
     output.pop();
-    visited[i] = false;
   }
 }
 
-backtrack(0, 0);
+backtrack(0);
+
+console.log(result);
