@@ -74,6 +74,7 @@
 | 17. Letter Combinations of a Phone Number         | DFS             | 250204 |
 | 18. 4Sum Number                                   | DFS, 백트래킹   | 250205 |
 | 19. Remove Nth Node From End of List              | 연결리스트      | 250206 |
+| 104. Maximum Depth of Binary Tree                 | 트리, DFS       | 250516 |
 | 200. Number of Islands                            | 그래프          | 250509 |
 | 322. Coin Change                                  | DP              | 250425 |
 | 739. Daily TemperaturesStates                     | 스택/큐         | 250418 |
