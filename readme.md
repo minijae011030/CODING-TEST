@@ -76,6 +76,7 @@
 | 19. Remove Nth Node From End of List              | 연결리스트      | 250206 |
 | 104. Maximum Depth of Binary Tree                 | 트리, DFS       | 250516 |
 | 200. Number of Islands                            | 그래프          | 250509 |
+| 236. Lowest Common Ancestor of a Binary Tree      | 트리            | 250516 |
 | 322. Coin Change                                  | DP              | 250425 |
 | 739. Daily TemperaturesStates                     | 스택/큐         | 250418 |
 | 785. Is Graph Bipartite?                          | BFS             | 250425 |
