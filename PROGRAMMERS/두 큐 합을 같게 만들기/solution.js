@@ -1,20 +1,17 @@
 function solution(queue1, queue2) {
   var answer = 0;
-  let n = queue1.length;
+  let N = queue1.length;
   let target =
     (queue1.reduce((acc, cur) => (acc += cur), 0) +
       queue2.reduce((acc, cur) => (acc += cur), 0)) /
     2;
-
-  let copiedQueue1 = [...queue1];
-  let copiedQueue2 = [...queue2];
 
   let sum1 = queue1.reduce((acc, cur) => (acc += cur), 0);
   let queue1Idx = 0;
   let queue2Idx = 0;
 
   while (1) {
-    if (answer > n * 3) return -1;
+    if (answer > N * 3) return -1;
     if (sum1 === target) return answer;
 
     if (sum1 > target) {
