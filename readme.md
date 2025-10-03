@@ -1,5 +1,7 @@
 # 코딩테스트 대비 문제풀이
 
+[![Solved.ac Profile](http://mazassumnida.wtf/api/v2/generate_badge?boj=minijae011030)](https://solved.ac/minijae011030/)
+
 ## 푼 문제
 
 ### 백준
