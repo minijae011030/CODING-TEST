@@ -1,6 +1,9 @@
 # 코딩테스트 대비 문제풀이
 
-[![Solved.ac Profile](http://mazassumnida.wtf/api/v2/generate_badge?boj=minijae011030)](https://solved.ac/minijae011030/)
+<div align="center">
+  <img src="http://mazassumnida.wtf/api/v2/generate_badge?boj=minijae011030" />
+  <img src="https://mazandi.herokuapp.com/api?handle=minijae011030&theme=warm" />
+</div>
 
 ## 푼 문제
 
