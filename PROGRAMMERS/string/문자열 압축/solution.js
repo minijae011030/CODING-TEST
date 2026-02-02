@@ -1,31 +1,35 @@
 function solution(s) {
-  var answer = s.length;
+  let min = s.length;
 
-  for (let i = 1; i <= s.length; i++) {
-    // i -> 자르는 개수
-    let zipString = [];
+  for (let i = 1; i <= Math.floor(s.length / 2); i++) {
+    let arr = splitStr(s, i);
 
-    for (let j = 0; j < s.length; j += i) {
-      zipString.push(s.slice(j, j + i));
-    }
+    let zipLen = 0;
+    let el = arr[0];
+    let repeat = 1;
 
-    let finalString = "";
-    let count = 1;
-
-    for (let k = 1; k < zipString.length; k++) {
-      if (zipString[k] === zipString[k - 1]) {
-        count++;
+    for (let j = 1; j < arr.length; j++) {
+      if (el === arr[j]) {
+        repeat++;
       } else {
-        finalString += (count > 1 ? count : "") + zipString[k - 1];
-        count = 1;
+        zipLen += (repeat > 1 ? String(repeat).length : 0) + el.length;
+        el = arr[j];
+        repeat = 1;
       }
     }
-
-    // 마지막 처리
-    finalString += (count > 1 ? count : "") + zipString[zipString.length - 1];
-
-    answer = Math.min(answer, finalString.length);
+    zipLen += (repeat > 1 ? String(repeat).length : 0) + el.length;
+    min = Math.min(min, zipLen);
   }
 
-  return answer;
+  return min;
+}
+
+function splitStr(str, len) {
+  let arr = [];
+
+  for (let i = 0; i < str.length; i += len) {
+    arr.push(str.slice(i, i + len));
+  }
+
+  return arr;
 }
