@@ -24,10 +24,5 @@ function solution(n, edge) {
     }
   }
 
-  let maxCnt = 0;
-  queue.forEach(([_, cnt]) => {
-    if (cnt === max) maxCnt++;
-  });
-
-  return maxCnt;
+  return queue.filter(([_, cnt]) => cnt === max).length;
 }
