@@ -1,19 +1,20 @@
 function solution(n, computers) {
-  var answer = 0;
-  let visited = Array(n).fill(0);
+  let answer = 0;
+  let visited = Array.from({ length: n }).fill(0);
 
-  for (let i = 0; i < computers.length; i++) {
+  for (let i = 0; i < n; i++) {
     if (!visited[i]) {
+      visited[i] = 1;
+      dfs(i);
       answer++;
-      DFS(i);
     }
   }
 
-  function DFS(idx) {
-    visited[idx] = 1;
-    for (let i = 0; i < computers[idx].length; i++) {
-      if (!visited[i] && computers[idx][i]) {
-        DFS(i);
+  function dfs(node) {
+    for (let i = 0; i < computers[node].length; i++) {
+      if (computers[node][i] && !visited[i]) {
+        visited[i] = 1;
+        dfs(i);
       }
     }
   }
