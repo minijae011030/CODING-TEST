@@ -22,10 +22,10 @@ for (let i = 0; i < n; i++) {
   let min = arr[0][1];
 
   for (let i = 1; i < arr.length; i++) {
-    // 현재까지의 가장 높은 면접 등수와 현재 지원자의 면접 등수 비교
-    min = Math.min(min, arr[i][1]);
-    // 현재까지의 가장 높은 면접 등수보다 현재 지원자의 면접 등수가 낮다면 탈락
+    // 현재까지의 가장 좋은 면접 등수보다 현재 지원자의 면접 등수가 좋지않다면 탈락
     if (min < arr[i][1]) ans--;
+    // 현재까지의 가장 좋은 면접 등수와 현재 지원자의 면접 등수 비교
+    min = Math.min(min, arr[i][1]);
   }
 
   console.log(ans);
