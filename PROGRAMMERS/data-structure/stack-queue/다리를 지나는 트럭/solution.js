@@ -1,28 +1,23 @@
 function solution(bridge_length, weight, truck_weights) {
-  let waiting_queue = [];
-  let bridge_queue = [];
+  let cur_weight = 0;
 
   let time = 0;
+  let bridge = Array.from({ length: bridge_length }).fill(0);
 
-  for (truck of truck_weights) {
-    waiting_queue.push([truck, 0]);
-  }
-
-  bridge_queue.push(waiting_queue.shift());
-
-  while (waiting_queue.length > 0 || bridge_queue.length > 0) {
+  while (truck_weights.length > 0 || cur_weight > 0) {
     time++;
-    bridge_queue.forEach((truck) => (truck[1] += 1));
+    cur_weight -= bridge.shift();
 
-    if (bridge_queue[0][1] == bridge_length) bridge_queue.shift();
-    const cur_weight = bridge_queue.reduce((acc, cur) => acc + cur[0], 0);
-    if (
-      waiting_queue.length > 0 &&
-      cur_weight + waiting_queue[0][0] <= weight
-    ) {
-      bridge_queue.push(waiting_queue.shift());
+    if (truck_weights.length > 0) {
+      if (truck_weights[0] + cur_weight <= weight) {
+        let truck = truck_weights.shift();
+        cur_weight += truck;
+        bridge.push(truck);
+      } else {
+        bridge.push(0);
+      }
     }
   }
 
-  return time + 1;
+  return time;
 }
