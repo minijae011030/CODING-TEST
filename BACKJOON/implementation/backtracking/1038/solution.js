@@ -1,21 +1,38 @@
 const fs = require("fs");
 const filePath = process.platform === "linux" ? "/dev/stdin" : "input.txt";
 let input = fs.readFileSync(filePath).toString().trim().split("\n");
-const N = Number(input[0]);
 
-const result = [];
+/**
+ * n번째 감소하는 수를 찾는 함수
+ * @param {number} n n번째 감소하는 수를 찾기 위한 변수
+ */
+function solution(n) {
+  let result = [];
 
-function backtrack(numStr, maxDigit) {
-  if (numStr !== "") result.push(Number(numStr));
+  /**
+   * 감소하는 수를 찾기 위해 재귀
+   * @param {string} numStr 현재 감소하는 수
+   * @param {number} lastDigit 현재 감소하는 수의 마지막 숫자
+   */
+  function dfs(numStr, lastDigit) {
+    result.push(Number(numStr));
 
-  for (let i = 0; i < maxDigit; i++) {
-    backtrack(numStr + i, i);
+    if (lastDigit === 0) return;
+
+    for (let i = 0; i < lastDigit; i++) {
+      dfs(numStr + i, i);
+    }
   }
+
+  for (let i = 0; i <= 9; i++) {
+    dfs(String(i), i);
+  }
+
+  result.sort((a, b) => a - b);
+
+  return result.length > n ? result[n] : -1;
 }
 
-for (let first = 0; first <= 9; first++) {
-  backtrack(String(first), first);
-}
+let n = Number(input[0]);
 
-result.sort((a, b) => a - b);
-console.log(result.length < N ? -1 : result[N]);
+console.log(solution(n));
