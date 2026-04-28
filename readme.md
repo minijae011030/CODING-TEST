@@ -210,6 +210,8 @@
 | 17. Letter Combinations of a Phone Number         | DFS             | 250204 |
 | 18. 4Sum Number                                   | DFS, 백트래킹   | 250205 |
 | 19. Remove Nth Node From End of List              | 연결리스트      | 250206 |
+| 20. Valid Parentheses                             | 스택            | 250418 |
+| 42. Trapping Rain Water                           | 투포인터        | 260428 |
 | 104. Maximum Depth of Binary Tree                 | 트리, DFS       | 250516 |
 | 200. Number of Islands                            | 그래프          | 250509 |
 | 236. Lowest Common Ancestor of a Binary Tree      | 트리            | 250516 |
