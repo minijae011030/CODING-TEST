@@ -15,62 +15,55 @@ function solution(edges) {
     생성한 정점의 번호, 도넛 모양 그래프 수, 막대 모양 그래프 수, 8자 모양 그래프 수 리턴
     */
 
+  let n = 1_000_001;
+
+  let answer = [0, 0, 0, 0];
+  let [createdNode, graphCnt] = [0, 0]; // 생성 정점 저장과 몇개의 그래프가 있는지 저장
+  let maxNode = 0; // 가장 노드의 번호가 큰 노드
+  let existingNode = new Set(); // 정점의 번호가 순차적으로 주어진다는 보장이 없다
+
+  let adjList = Array.from({ length: n + 1 }, () => []); // 각 노드의 인접 리스트를 저장하는 배열
+  let inAndOut = Array.from({ length: n + 1 }, () => [0, 0]); // [나감, 들어옴]
+
+  // 1. 먼저 생성 노드와 그래프 수를 찾아야한다
+
+  // 간선 정보를 인접 리스트와 inAndOut 정보로 변환
+  edges.forEach(([from, to]) => {
+    adjList[from].push(to);
+    inAndOut[from][0] += 1;
+    inAndOut[to][1] += 1;
+    maxNode = Math.max(maxNode, from, to);
+    existingNode.add(from);
+    existingNode.add(to);
+  });
+
+  // 나간 간선이 제일 많으면서 들어온 간선이 0인 노드가 생성 노드
+  inAndOut.forEach(([outCnt, inCnt], index) => {
+    if (inCnt === 0 && outCnt > graphCnt) {
+      [createdNode, graphCnt] = [index, outCnt];
+    }
+  });
+
+  answer[0] = createdNode;
+
+  // 2. 생성 노드에 연결된 인접리스트에 가서 도넛의 유형을 구한다
+
   /*
-    도넛 판정 기준
-    나가는 길이 두갈래? -> 바로 8자
-    돌아왔다? -> 도넛 혹은 8자
-        가고있는데 두갈래길 나오면 8자
-        안나오면 도넛
-    안돌아왔다? -> 일자
+    막대모양: 나가는 간선 0개
+    8자모양: 들어오는 간선 2개 이상, 나가는 간선 2개
+    도넛모양: 전체 - 막대 - 8자
     */
 
-  let maxNode = 0;
-  const existingNodes = new Set(); // 실제로 존재하는 노드인지
-  for (let [from, to] of edges) {
-    maxNode = Math.max(maxNode, from, to);
-    existingNodes.add(from);
-    existingNodes.add(to);
-  }
-
-  // inAndOut[node] = [outdegree, indegree]
-  let inAndOut = Array.from({ length: maxNode + 1 }, () => [0, 0]);
-  for (let [from, to] of edges) {
-    inAndOut[from][0]++;
-    inAndOut[to][1]++;
-  }
-
-  let answer = [0, 0, 0, 0]; // 생성점, 도넛, 막대, 8자
-
-  // 생성 정점 찾기
   for (let i = 1; i <= maxNode; i++) {
-    let [outCnt, inCnt] = inAndOut[i];
-    if (outCnt >= 2 && inCnt === 0) {
-      answer[0] = i;
-      break;
-    }
-  }
-
-  let createdNode = answer[0];
-  let totalGraphs = inAndOut[createdNode][0];
-
-  // 전체 간선을 돌며 특이 정점들의 개수 세기
-  for (let i = 1; i <= maxNode; i++) {
-    if (!existingNodes.has(i) || i === createdNode) continue;
+    if (!existingNode.has(i)) continue;
 
     let [outCnt, inCnt] = inAndOut[i];
 
-    // 막대 모양: 나가는 간선 0개
-    if (outCnt === 0) {
-      answer[2]++;
-    }
-    // 8자 모양: 나가는 간선 2개, 들어오는 간선 2개 이상
-    else if (outCnt === 2 && inCnt >= 2) {
-      answer[3]++;
-    }
+    if (outCnt === 0) answer[2] += 1;
+    else if (inCnt >= 2 && outCnt === 2) answer[3] += 1;
   }
 
-  // 도넛 모양: 총 개수에서 막대와 8자를 뺌
-  answer[1] = totalGraphs - answer[2] - answer[3];
+  answer[1] = graphCnt - answer[2] - answer[3];
 
   return answer;
 }
